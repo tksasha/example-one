@@ -2,6 +2,7 @@ package main_test
 
 import (
   "testing"
+  "sort"
 
   "github.com/stretchr/testify/assert"
 
@@ -38,8 +39,8 @@ func TestResultsSwap(t *testing.T) {
   results.Swap(1, 2)
 
   expectation := Results{
-    []int{ 108, 2 },
-    []int{ 101, 1 },
+    []int{ int('l'), 2 },
+    []int{ int('e'), 1 },
   }
 
   assert.Equal(t, expectation, results[1:3])
@@ -53,4 +54,19 @@ func TestResultsAppend(t *testing.T) {
   }
 
   assert.Equal(t, 11, results.Len())
+}
+
+func TestResultsSorting(t *testing.T) {
+  results := NewResults()
+
+  sort.Stable(results)
+
+  expectation := Results{
+    []int{ int('l'), 2 },
+    []int{ int('h'), 1 },
+    []int{ int('e'), 1 },
+    []int{ int('o'), 1 },
+  }
+
+  assert.Equal(t, expectation, results)
 }
