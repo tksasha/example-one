@@ -23,21 +23,53 @@ func (results Results) Swap(i, j int) {
   results[i], results[j] = results[j], results[i]
 }
 
-func (results *Results) Append(letter rune) {
+func (results *Results) Append(input rune) {
+  //
+  // only letters(a-zA-Z) allowed
+  //
+  mask := regexp.MustCompile("[[:alpha:]]")
+
+  //
+  // convert `rune` to `string`
+  //
+  letter := string(input)
+
+  //
+  // ignore non-letters characters
+  //
+  if mask.MatchString(letter) == false {
+    return
+  }
+
+  //
+  // downcase
+  //
+  letter = strings.ToLower(letter)
+
+  //
+  // get ASCII code of letter
+  //
+  code := int(letter[0])
+
+  //
+  // if `letter` is already in `results` increase counters
+  // else add `letter` to `results` with counter's value 1
+  //
   for _, elements := range *results {
-    if elements[0] == int(letter) {
+    if elements[0] == code {
       elements[1]++
 
       return
     }
   }
 
-  *results = append(*results, []int{ int(letter), 1 })
+  //
+  // update `results`
+  //
+  *results = append(*results, []int{ code, 1 })
 }
 
 func main() {
-  mask := regexp.MustCompile("[[:alpha:]]")
-
   var results Results
 
   var input string
@@ -46,13 +78,9 @@ func main() {
 
   scanner.Scan()
 
-  input = strings.ToLower(scanner.Text())
+  input = scanner.Text()
 
   for _, letter := range input {
-    if mask.MatchString(string(letter)) == false {
-      continue
-    }
-
     results.Append(letter)
   }
 

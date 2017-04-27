@@ -44,3 +44,13 @@ func TestResultsSwap(t *testing.T) {
 
   assert.Equal(t, expectation, results[1:3])
 }
+
+func TestResultsAppend(t *testing.T) {
+  var results Results
+
+  for _, letter := range "Hello World! and hello world again" {
+    results.Append(letter)
+  }
+
+  assert.Equal(t, 11, results.Len())
+}
