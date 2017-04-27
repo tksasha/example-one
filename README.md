@@ -15,7 +15,9 @@ the program will produce:
 ```
 
 ### How to run
-`git clone git://github.com/tksasha/example-one`
-`cd example-one`
-`go test`
-`go run main.go`
+```
+git clone git://github.com/tksasha/example-one
+cd example-one
+go test
+go run main.go
+```
