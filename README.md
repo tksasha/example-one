@@ -4,7 +4,7 @@ This program parse string and count how many times each letter presents in this 
 
 
 Example:
-for string "Hello"
+for string `"Hello"`
 
 the program will produce:
 ```
